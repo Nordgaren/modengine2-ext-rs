@@ -1,23 +1,21 @@
 #![allow(static_mut_refs)]
 
 use std::{
-    arch::x86_64::__cpuid,
     cell::OnceCell,
     ffi::{CString, c_char, c_void},
 };
-use vtable_rs::{VPtr, vmt_instance, vtable};
+use vtable_rs::{VPtr, vtable};
 
 #[vtable]
 pub trait ModEngine2ExtVmt {
     fn destructor(&mut self) {
-        println!("destructor!");
-        // We can provide a default implementation too!
+        println!("default impl destructor!");
     }
     fn on_attach(&self) {
-        println!("attached!");
+        println!("default impl attached!");
     }
     fn on_detach(&self) {
-        println!("detached!");
+        println!("default impl detached!");
     }
     fn id(&self) -> *const c_char;
 }
@@ -58,9 +56,11 @@ pub unsafe extern "C" fn modengine_ext_init_builtin(
     extension: *mut *mut ModEngine2Extension,
 ) -> bool {
     println!("modengine_ext_init_builtin");
-    *extension = EXTENSION
-        .get_mut()
-        .expect("EXTENSION is not initialized! Call `modengine2_rs::init` in DLLMain!");
+    unsafe {
+        *extension = EXTENSION
+            .get_mut()
+            .expect("EXTENSION is not initialized! Call `modengine2_rs::init` in DLLMain!");
+    }
 
     true
 }
