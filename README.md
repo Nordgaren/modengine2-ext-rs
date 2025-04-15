@@ -1,4 +1,4 @@
-# modengine2-rs
+# modengine2-ext-rs
 Minimal bindings for modengine2 extension.
 
 ## Usage
@@ -44,7 +44,24 @@ pub extern "stdcall" fn DllMain(hinstDLL: usize, dwReason: u32, lpReserved: *mut
     }
 }
 ```
-everything else is handled for you
+everything else is handled for you, except the changes to the `.toml` file.
+
+## toml file
+You will need to add the dll to `external_dlls`. The path is relative to the modengine exe.
+for example if it's in your `mod` folder for the ME2 mod, you would import it like so: `external_dlls = [ "mod/modname.dll" ]`
+
+The name of your mod in the `MOD_NAME` environment variable is the name you want
+to use for enabling the extension. Altogether it will look like this (Assume `MOD_NAME=modname`)
+
+```toml
+external_dlls = [ "mod/modname.dll" ]
+
+[extension.modname]
+enabled = true
+```
+Make sure you enable the extension before the `extension.mod_loader`, or else your file mods
+will not get loaded. You can also enable it towards the end of the config file, after the `mods = []`
+section.
 
 # Feature
 `modengine_ext_init` - This feature removes the built in `modengine_ext_init` 

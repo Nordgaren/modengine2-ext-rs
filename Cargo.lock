@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "modengine2-rs"
+name = "modengine2-ext"
 version = "0.1.0"
 dependencies = [
  "vtable-rs",

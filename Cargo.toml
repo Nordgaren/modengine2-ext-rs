@@ -1,5 +1,5 @@
 [package]
-name = "modengine2-rs"
+name = "modengine2-ext"
 version = "0.1.0"
 edition = "2024"
 

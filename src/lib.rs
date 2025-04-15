@@ -89,14 +89,14 @@ impl ModEngine2Extension {
     /// # Examples
     ///
     /// ```rust
-    /// use modengine2_rs::ModEngine2Extension;
+    /// use modengine2_ext::ModEngine2Extension;
     ///
     /// fn on_attach(this: &ModEngine2Extension) {
     ///     // initialize mod here
     /// }
     ///
     /// fn main() {
-    ///    modengine2_rs::init(on_attach, None, None);
+    ///    modengine2_ext::init(on_attach, None, None);
     /// }
     /// ```
     fn new(
